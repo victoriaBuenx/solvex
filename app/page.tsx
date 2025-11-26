@@ -31,7 +31,7 @@ export default function DashboardPage() {
           <div className="mb-8 flex items-center justify-between">
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-balance mb-2">
-                Monitor de Dispositivo Raspberry Pi
+                BioEdge
               </h1>
               <p className="text-muted-foreground">
                 Panel de control para ingesta de datos, procesamiento y
