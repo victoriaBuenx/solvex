@@ -95,42 +95,7 @@ const [devices, setDevices] = useState();
             <>
               <div className="flex flex-row gap-2 mb-8 justify-between w-full">
                 <div className="flex gap-2 w-full">
-                  <DeviceCard
-                    icon={<MdOutlineSdStorage className="h-10 w-10" />}
-                    device_id="TCAM-001"
-                    device_name="SD CARD"
-                    location="Reserva X"
-                    status="montada"
-                    sd_detectada={true}
-                    valid={true}
-                  />
-                  <DeviceCard
-                    device_id="TCAM-001"
-                    device_name="USB"
-                    location="Reserva X"
-                    status="montada"
-                    sd_detectada={true}
-                    valid={true}
-                    icon={<AiOutlineUsb className="h-10 w-10" />}
-                  />
-                  <DeviceCard
-                    icon={<AiOutlineUsb className="h-10 w-10" />}
-                    device_id="TCAM-001"
-                    device_name="SSD"
-                    location="Reserva X"
-                    status="error"
-                    sd_detectada={true}
-                    valid={true}
-                  />
-                  <DeviceCard
-                    icon={<AiOutlineUsb className="h-10 w-10" />}
-                    device_id="TCAM-001"
-                    device_name="DISK"
-                    location="Reserva X"
-                    status="inactiva"
-                    sd_detectada={true}
-                    valid={true}
-                  />
+                  
                 </div>
               </div>
               <div>
