@@ -1,16 +1,25 @@
-"use client"
-import { useState } from "react"
-import { ThemeToggle } from "@/components/theme-toggle"
-import SidebarNav from "@/components/dashboard/sidebar-nav"
-import SDProgressPanel from "@/components/dashboard/sd-progress-panel"
-import RecordsPanel from "@/components/dashboard/records-panel"
-import ModelResultsPanel from "@/components/dashboard/model-results-panel"
-import SystemLogsPanel from "@/components/dashboard/system-logs-panel"
-import AnomaliesPanel from "@/components/dashboard/anomalies-panel"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+"use client";
+import { useState } from "react";
+import { ThemeToggle } from "@/components/theme-toggle";
+import SidebarNav from "@/components/dashboard/sidebar-nav";
+import SDProgressPanel from "@/components/dashboard/sd-progress-panel";
+import RecordsPanel from "@/components/dashboard/records-panel";
+import ModelResultsPanel from "@/components/dashboard/model-results-panel";
+import SystemLogsPanel from "@/components/dashboard/system-logs-panel";
+import AnomaliesPanel from "@/components/dashboard/anomalies-panel";
+import { DeviceCard } from "@/components/ui/deviceCard";
+import { MdOutlineSdStorage } from "react-icons/md";
+import { CiUsb } from "react-icons/ci";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState("sync")
+  const [activeTab, setActiveTab] = useState("sync");
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-background text-foreground">
@@ -21,10 +30,57 @@ export default function DashboardPage() {
         <div className="max-w-7xl mx-auto">
           <div className="mb-8 flex items-center justify-between">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-balance mb-2">Monitor de Dispositivo Raspberry Pi</h1>
-              <p className="text-muted-foreground">Panel de control para ingesta de datos, procesamiento y monitoreo</p>
+              <h1 className="text-3xl md:text-4xl font-bold text-balance mb-2">
+                Monitor de Dispositivo Raspberry Pi
+              </h1>
+              <p className="text-muted-foreground">
+                Panel de control para ingesta de datos, procesamiento y
+                monitoreo
+              </p>
             </div>
+
             <ThemeToggle />
+          </div>
+
+          <div className="flex flex-row gap-2 mb-8 justify-between w-full">
+            <div className="flex gap-2 w-full">
+              <DeviceCard
+                icon={<MdOutlineSdStorage className="h-10 w-10" />}
+                device_id="TCAM-001"
+                device_name="SD CARD"
+                location="Reserva X"
+                status="montada"
+                sd_detectada={true}
+                valid={true}
+              />
+              <DeviceCard
+                device_id="TCAM-001"
+                device_name="USB"
+                location="Reserva X"
+                status="montada"
+                sd_detectada={true}
+                valid={true}
+                icon={<CiUsb className="h-10 w-10" />}
+              />
+              <DeviceCard
+                icon={<CiUsb className="h-10 w-10" />}
+                device_id="TCAM-001"
+                device_name="SSD"
+                location="Reserva X"
+                status="error"
+                sd_detectada={true}
+                valid={true}
+              />
+              <DeviceCard
+                icon={<CiUsb className="h-10 w-10" />}
+                device_id="TCAM-001"
+                device_name="DISK"
+                location="Reserva X"
+                status="inactiva"
+                sd_detectada={true}
+                valid={true}
+              />
+            </div>
           </div>
 
           {/* Tab Content */}
@@ -60,35 +116,53 @@ export default function DashboardPage() {
               <Card className="border-border bg-card/50 backdrop-blur">
                 <CardHeader>
                   <CardTitle>Información del Sistema</CardTitle>
-                  <CardDescription>Detalles técnicos de la Raspberry Pi</CardDescription>
+                  <CardDescription>
+                    Detalles técnicos de la Raspberry Pi
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div className="space-y-4">
                       <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">Modelo</p>
+                        <p className="text-xs text-muted-foreground mb-1">
+                          Modelo
+                        </p>
                         <p className="font-semibold text-lg">Raspberry Pi 4B</p>
                       </div>
                       <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">CPU</p>
-                        <p className="font-semibold">ARM Cortex-A72 4x 1.5GHz</p>
+                        <p className="text-xs text-muted-foreground mb-1">
+                          CPU
+                        </p>
+                        <p className="font-semibold">
+                          ARM Cortex-A72 4x 1.5GHz
+                        </p>
                       </div>
                       <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">RAM Disponible</p>
-                        <p className="font-semibold text-green-400">6.2 GB / 8 GB</p>
+                        <p className="text-xs text-muted-foreground mb-1">
+                          RAM Disponible
+                        </p>
+                        <p className="font-semibold text-green-400">
+                          6.2 GB / 8 GB
+                        </p>
                       </div>
                     </div>
                     <div className="space-y-4">
                       <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">Uptime</p>
+                        <p className="text-xs text-muted-foreground mb-1">
+                          Uptime
+                        </p>
                         <p className="font-semibold">45 días, 12 horas</p>
                       </div>
                       <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">Temperatura</p>
+                        <p className="text-xs text-muted-foreground mb-1">
+                          Temperatura
+                        </p>
                         <p className="font-semibold text-blue-400">52.3°C</p>
                       </div>
                       <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">Almacenamiento</p>
+                        <p className="text-xs text-muted-foreground mb-1">
+                          Almacenamiento
+                        </p>
                         <p className="font-semibold">243.5 GB / 256 GB</p>
                       </div>
                     </div>
@@ -122,5 +196,5 @@ export default function DashboardPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }
