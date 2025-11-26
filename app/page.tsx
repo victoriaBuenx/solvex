@@ -18,6 +18,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import ModelsPanel from "@/components/dashboard/models";
 
 export default function DashboardPage() {
   const [activeTab, setActiveTab] = useState("sync");
@@ -43,61 +44,62 @@ export default function DashboardPage() {
             <ThemeToggle />
           </div>
 
-          <div className="flex flex-row gap-2 mb-8 justify-between w-full">
-            <div className="flex gap-2 w-full">
-              <DeviceCard
-                icon={<MdOutlineSdStorage className="h-10 w-10" />}
-                device_id="TCAM-001"
-                device_name="SD CARD"
-                location="Reserva X"
-                status="montada"
-                sd_detectada={true}
-                valid={true}
-              />
-              <DeviceCard
-                device_id="TCAM-001"
-                device_name="USB"
-                location="Reserva X"
-                status="montada"
-                sd_detectada={true}
-                valid={true}
-                icon={<AiOutlineUsb className="h-10 w-10" />}
-              />
-              <DeviceCard
-                icon={<AiOutlineUsb className="h-10 w-10" />}
-                device_id="TCAM-001"
-                device_name="SSD"
-                location="Reserva X"
-                status="error"
-                sd_detectada={true}
-                valid={true}
-              />
-              <DeviceCard
-                icon={<AiOutlineUsb className="h-10 w-10" />}
-                device_id="TCAM-001"
-                device_name="DISK"
-                location="Reserva X"
-                status="inactiva"
-                sd_detectada={true}
-                valid={true}
-              />
-            </div>
-          </div>
-
           {/* Tab Content */}
           {activeTab === "sync" && (
-            <div>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                <SDProgressPanel />
-                <RecordsPanel />
-              </div>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div className="lg:col-span-2">
-                  <ModelResultsPanel />
+            <>
+              <div className="flex flex-row gap-2 mb-8 justify-between w-full">
+                <div className="flex gap-2 w-full">
+                  <DeviceCard
+                    icon={<MdOutlineSdStorage className="h-10 w-10" />}
+                    device_id="TCAM-001"
+                    device_name="SD CARD"
+                    location="Reserva X"
+                    status="montada"
+                    sd_detectada={true}
+                    valid={true}
+                  />
+                  <DeviceCard
+                    device_id="TCAM-001"
+                    device_name="USB"
+                    location="Reserva X"
+                    status="montada"
+                    sd_detectada={true}
+                    valid={true}
+                    icon={<AiOutlineUsb className="h-10 w-10" />}
+                  />
+                  <DeviceCard
+                    icon={<AiOutlineUsb className="h-10 w-10" />}
+                    device_id="TCAM-001"
+                    device_name="SSD"
+                    location="Reserva X"
+                    status="error"
+                    sd_detectada={true}
+                    valid={true}
+                  />
+                  <DeviceCard
+                    icon={<AiOutlineUsb className="h-10 w-10" />}
+                    device_id="TCAM-001"
+                    device_name="DISK"
+                    location="Reserva X"
+                    status="inactiva"
+                    sd_detectada={true}
+                    valid={true}
+                  />
                 </div>
-                <AnomaliesPanel />
               </div>
-            </div>
+              <div>
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                  <SDProgressPanel />
+                  <RecordsPanel />
+                </div>
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                  <div className="lg:col-span-2">
+                    <ModelResultsPanel />
+                  </div>
+                  <AnomaliesPanel />
+                </div>
+              </div>
+            </>
           )}
 
           {activeTab === "logs" && (
@@ -192,6 +194,11 @@ export default function DashboardPage() {
                   </div>
                 </CardContent>
               </Card>
+            </div>
+          )}
+          {activeTab === "models" && (
+            <div>
+              <ModelsPanel />
             </div>
           )}
         </div>
