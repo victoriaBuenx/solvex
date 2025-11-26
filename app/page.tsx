@@ -10,6 +10,7 @@ import AnomaliesPanel from "@/components/dashboard/anomalies-panel";
 import { DeviceCard } from "@/components/ui/deviceCard";
 import { MdOutlineSdStorage } from "react-icons/md";
 import { CiUsb } from "react-icons/ci";
+import { AiOutlineUsb } from "react-icons/ai";
 import {
   Card,
   CardContent,
@@ -60,10 +61,10 @@ export default function DashboardPage() {
                 status="montada"
                 sd_detectada={true}
                 valid={true}
-                icon={<CiUsb className="h-10 w-10" />}
+                icon={<AiOutlineUsb className="h-10 w-10" />}
               />
               <DeviceCard
-                icon={<CiUsb className="h-10 w-10" />}
+                icon={<AiOutlineUsb className="h-10 w-10" />}
                 device_id="TCAM-001"
                 device_name="SSD"
                 location="Reserva X"
@@ -72,7 +73,7 @@ export default function DashboardPage() {
                 valid={true}
               />
               <DeviceCard
-                icon={<CiUsb className="h-10 w-10" />}
+                icon={<AiOutlineUsb className="h-10 w-10" />}
                 device_id="TCAM-001"
                 device_name="DISK"
                 location="Reserva X"
