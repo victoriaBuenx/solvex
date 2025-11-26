@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import SidebarNav from "@/components/dashboard/sidebar-nav";
 import SDProgressPanel from "@/components/dashboard/sd-progress-panel";
@@ -18,9 +18,45 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import DeviceCardGroups from "@/components/dashboard/DeviceCardGroups";
+
+const POLLING_RATE = 3000;
+const API_URL = "http://10.156.124.132:8000/api/devices"
+
+
 
 export default function DashboardPage() {
+  const fetchDevices = async() => {
+  try {
+    const response = await fetch(API_URL)
+
+    if(!response.ok) {
+      throw new Error('Error HTTP')
+    }
+
+    const data = await response.json()
+    console.log("Datos de dispositivos:", data)
+    setDevices(data)
+
+  } catch (err) {
+    console.error("Fallo al obtener estado")
+  }
+}
+
   const [activeTab, setActiveTab] = useState("sync");
+  useEffect(() => {
+  // hacer peticion a la api
+  fetchDevices()
+
+  const interval = setInterval(() => {
+    fetchDevices()
+  }
+  , POLLING_RATE)
+
+  return () => clearInterval(interval)
+}, [])
+
+const [devices, setDevices] = useState();
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-background text-foreground">
@@ -45,42 +81,11 @@ export default function DashboardPage() {
 
           <div className="flex flex-row gap-2 mb-8 justify-between w-full">
             <div className="flex gap-2 w-full">
-              <DeviceCard
-                icon={<MdOutlineSdStorage className="h-10 w-10" />}
-                device_id="TCAM-001"
-                device_name="SD CARD"
-                location="Reserva X"
-                status="montada"
-                sd_detectada={true}
-                valid={true}
-              />
-              <DeviceCard
-                device_id="TCAM-001"
-                device_name="USB"
-                location="Reserva X"
-                status="montada"
-                sd_detectada={true}
-                valid={true}
-                icon={<AiOutlineUsb className="h-10 w-10" />}
-              />
-              <DeviceCard
-                icon={<AiOutlineUsb className="h-10 w-10" />}
-                device_id="TCAM-001"
-                device_name="SSD"
-                location="Reserva X"
-                status="error"
-                sd_detectada={true}
-                valid={true}
-              />
-              <DeviceCard
-                icon={<AiOutlineUsb className="h-10 w-10" />}
-                device_id="TCAM-001"
-                device_name="DISK"
-                location="Reserva X"
-                status="inactiva"
-                sd_detectada={true}
-                valid={true}
-              />
+              
+
+              <DeviceCardGroups devices={devices} />
+    
+               
             </div>
           </div>
 

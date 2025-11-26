@@ -41,7 +41,7 @@ export function DeviceCard({
     return (
       <Card
         className={cn(
-          "w-full max-w-sm overflow-hidden bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-8",
+          "w-full overflow-hidden h-[300px] bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-8",
           className
         )}
         {...props}
