@@ -48,7 +48,7 @@ export default function SidebarNav({
   onTabChange,
 }: SidebarNavProps) {
   return (
-    <nav className="w-full md:w-64 bg-card/50 backdrop-blur border-b md:border-r border-border p-4 md:p-6 space-y-2 md:min-h-screen">
+    <nav className="fixed top-0 left-0 h-screen w-64 bg-card/50 backdrop-blur border-r border-border p-6 space-y-2">
       <h2 className="font-semibold text-sm text-muted-foreground mb-4 uppercase tracking-wide">
         Navegación
       </h2>

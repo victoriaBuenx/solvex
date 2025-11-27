@@ -14,55 +14,55 @@ export default function Gallery({ open, onOpenChange, title }: any) {
       title: "Guacamaya Roja",
       // Foto vibrante de Zdeněk Macháček
       image:
-        "https://images.unsplash.com/photo-1551096066-87d903f5ce62?auto=format&fit=crop&w=400&q=80",
+        "https://elements-resized.envatousercontent.com/elements-video-cover-images/fbb5daa3-ee95-4fb4-a4c8-925ed36bc793/video_preview/video_preview_0000.jpg?w=500&cf_fit=cover&q=85&format=auto&s=8bfe862bc3b68e12e4e5a11e650ae65ca3d18fa0d13378f7954ce8787a3a4695",
     },
     {
       id: 2,
       title: "Águila Real",
       image:
-        "https://images.unsplash.com/photo-1698655191023-745a50785311?auto=format&fit=crop&w=400&q=80",
+        "https://imagenes.elpais.com/resizer/v2/2CY4RIANFBBAHCSBEPZVNZ5BG4.JPG?auth=2b2630b9e69bd538c70724515c85ded5d3b1b258ea5a69c0332c9390d1939211&width=414",
     },
     {
       id: 3,
       title: "Colibrí",
       image:
-        "https://images.unsplash.com/photo-1444464666168-49d633b86797?auto=format&fit=crop&w=400&q=80",
+        "https://elements-resized.envatousercontent.com/elements-video-cover-images/d50d9581-6f62-4f05-ad11-721a949185f7/video_preview/video_preview_0000.jpg?w=500&cf_fit=cover&q=85&format=auto&s=8575049fb216e16876db705e46a7e3c3c14cce28e67dd42f80e16c049c616da7",
     },
     {
       id: 4,
       title: "Tucán",
       image:
-        "https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=400&q=80",
+        "https://www.lavanguardia.com/files/image_990_484/uploads/2014/08/06/5f9c1a60be34b.jpeg",
     },
     {
       id: 5,
       title: "Búho Nival",
       image:
-        "https://images.unsplash.com/photo-1576408139360-3162b78b879c?auto=format&fit=crop&w=400&q=80",
+        "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgriXiA-CZRKYD1agB3SFEqJUWbATWtEuuogfDxhAyDJZvz_0aD9OAA54o92Ve2T2Ichl83EGFUzPtlGk5ML6ul1i4gGxVbi5bSsE7KlZ4yULj_Sic-7f-olbUVpLTAa0n6-fCrstnGb08/s2100/B%25C3%25BAho+nival+14.jpg ",
     },
     {
       id: 6,
       title: "Flamenco",
       image:
-        "https://images.unsplash.com/photo-1550953372-e565b9e072c4?auto=format&fit=crop&w=400&q=80",
+        "https://www.excelsior.com.mx/770x530/filters:format(webp):quality(75)/media/pictures/2024/11/25/3218106.jpg",
     },
     {
       id: 7,
       title: "Pavo Real",
       image:
-        "https://images.unsplash.com/photo-1505832018823-50331d70d237?auto=format&fit=crop&w=400&q=80",
+        "https://www.pavorealpedia.com/wp-content/uploads/2016/04/pavo-real-1.jpg",
     },
     {
       id: 8,
       title: "Pingüino Real",
       image:
-        "https://images.unsplash.com/photo-1598439210625-5067c578f3f6?auto=format&fit=crop&w=400&q=80",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRryUxvhhuAPrjwCS5D3da4-rxyNv2hc0DCvA&s",
     },
     {
       id: 9,
       title: "Cardenal",
       image:
-        "https://images.unsplash.com/photo-1484557985045-edf25e08da73?auto=format&fit=crop&w=400&q=80",
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQWqYQznlRQzueVDvVhNXWqAMkg2AKbczHlnX36wgP7wN2ORtvapMkpSSQrnDIwLaLcU24&usqp=CAU",
     },
   ];
 

@@ -11,6 +11,7 @@ import { DeviceCard } from "@/components/ui/deviceCard";
 import { MdOutlineSdStorage } from "react-icons/md";
 import { CiUsb } from "react-icons/ci";
 import { AiOutlineUsb } from "react-icons/ai";
+import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardContent,
@@ -25,6 +26,7 @@ const API_URL = "http://10.67.254.132:8000/api/devices"
 
 
 import ModelsPanel from "@/components/dashboard/models";
+import { StatusBadge } from "@/components/dashboard/statusBadge";
 
 export default function DashboardPage() {
   const fetchDevices = async() => {
@@ -65,7 +67,7 @@ const [devices, setDevices] = useState();
 const [empty, setEmpty] = useState(true)
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-background text-foreground">
+    <div className="flex min-h-screen bg-background text-foreground md:pl-64">
       <SidebarNav activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* Main Content */}
@@ -81,19 +83,26 @@ const [empty, setEmpty] = useState(true)
                 monitoreo
               </p>
             </div>
-
-            <ThemeToggle />
-          </div>
-
-          <div className="flex flex-row gap-2 mb-8 justify-between w-full">
-            <div className="flex gap-2 w-full">
-              <DeviceCardGroups devices={devices} />
+            <div className="flex items-center gap-4">
+              <StatusBadge mode="wifi" />
+              <ThemeToggle />
+              </div>
             </div>
-          </div>
+
+         
 
           {/* Tab Content */}
           {activeTab === "sync" && (
             <>
+              <div className="flex flex-row gap-2 mb-2 justify-between w-full">
+                <div className="flex gap-2 w-full">
+                  <DeviceCardGroups devices={devices} />
+                </div>
+              </div>
+              <div className="flex flex-row gap-2 mb-8 justify-between w-full">
+                <div className="flex gap-2 w-full">
+                </div>
+              </div>
               <div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
                   <SDProgressPanel empty={empty} />

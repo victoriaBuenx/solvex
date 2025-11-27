@@ -32,7 +32,6 @@ export function ThemeToggle() {
     const newTheme = theme === "dark" ? "light" : "dark"
     setTheme(newTheme)
     applyTheme(newTheme)
-    toast("Event has been created")
   }
 
   if (!mounted) return null
