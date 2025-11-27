@@ -11,6 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 import IMPORTED_JSON_DATA from "@/bdd/conabio_full_gps.json";
+import { Spinner } from "../ui/spinner";
 
 interface DetectionData {
   uuid?: string;
@@ -267,10 +268,10 @@ export default function ModelResultsPanel() {
                 variant="outline"
                 className={`${
                   model.status.includes("Completado")
-                    ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/30"
+                    ? "px-3 py-1 text-sm rounded-md bg-emerald-500/20 text-emerald-700 border-emerald-500/30"
                     : model.status === "Ejecutándose"
-                    ? "bg-blue-500/20 text-blue-300 border-blue-500/30"
-                    : "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
+                    ? "px-3 py-1 text-sm rounded-md bg-blue-500/20 text-blue-700 border-blue-500/30"
+                    : "px-3 py-1 text-sm rounded-md bg-yellow-500/20 text-amber-600 border-yellow-500/30"
                 }`}
               >
                 {model.status}
@@ -281,7 +282,14 @@ export default function ModelResultsPanel() {
             <div className="space-y-2">
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>Progreso</span>
-                <span>{model.progress}%</span>
+                <div>
+                  {
+                    model.progress !== 100 && (
+                      <Spinner className="w-4 h-4 mr-2 inline-block text-purple-800" />
+                    ) 
+                  }
+                  <span>{model.progress}%</span>
+                </div>
               </div>
               <div className="w-full bg-secondary/30 rounded-full h-2">
                 <div
