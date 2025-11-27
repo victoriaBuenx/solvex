@@ -1,19 +1,27 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { Folder, Plus, Search, MoreVertical, Edit2, Trash2, ImageIcon } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import FileContent from "./FileContent"
-import FileTree from "./FileTree"
+import { useState } from "react";
+import {
+  Folder,
+  Plus,
+  Search,
+  MoreVertical,
+  Edit2,
+  Trash2,
+  ImageIcon
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import FileContent from "./FileContent";
+import FileTree from "./FileTree";
 
 interface FileItem {
-  id: string
-  name: string
-  type: "file" | "folder"
-  path: string
-  children?: FileItem[]
-  content?: string
+  id: string;
+  name: string;
+  type: "file" | "folder";
+  path: string;
+  children?: FileItem[];
+  content?: string;
 }
 
 const INITIAL_FILES: FileItem[] = [
@@ -35,15 +43,14 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/backend/main.py",
             content:
-              'from fastapi import FastAPI\nfrom routers import devices, sd, network\n\napp = FastAPI(title="EcoEdge API")\n\napp.include_router(devices.router, prefix="/api/devices")\napp.include_router(sd.router, prefix="/api/sd")\napp.include_router(network.router, prefix="/api/network")\n',
+              'from fastapi import FastAPI\nfrom routers import devices, sd, network\n\napp = FastAPI(title="EcoEdge API")\n\napp.include_router(devices.router, prefix="/api/devices")\napp.include_router(sd.router, prefix="/api/sd")\napp.include_router(network.router, prefix="/api/network")\n'
           },
           {
             id: "1-1-2",
             name: "requirements.txt",
             type: "file",
             path: "/ecoedge/backend/requirements.txt",
-            content:
-              "fastapi\nuvicorn\npydantic\npython-multipart\n",
+            content: "fastapi\nuvicorn\npydantic\npython-multipart\n"
           },
           {
             id: "1-1-3",
@@ -57,7 +64,7 @@ const INITIAL_FILES: FileItem[] = [
                 type: "file",
                 path: "/ecoedge/backend/routers/devices.py",
                 content:
-                  'from fastapi import APIRouter\nimport json, os\n\nrouter = APIRouter()\nSTATE_DIR = "/home/hack39/data/system"\n\n@router.get("/")\nasync def list_devices():\n    path = os.path.join(STATE_DIR, "devices.json")\n    if not os.path.exists(path):\n        return {}\n    with open(path) as f:\n        return json.load(f)\n',
+                  'from fastapi import APIRouter\nimport json, os\n\nrouter = APIRouter()\nSTATE_DIR = "/home/hack39/data/system"\n\n@router.get("/")\nasync def list_devices():\n    path = os.path.join(STATE_DIR, "devices.json")\n    if not os.path.exists(path):\n        return {}\n    with open(path) as f:\n        return json.load(f)\n'
               },
               {
                 id: "1-1-3-2",
@@ -65,7 +72,7 @@ const INITIAL_FILES: FileItem[] = [
                 type: "file",
                 path: "/ecoedge/backend/routers/sd.py",
                 content:
-                  'from fastapi import APIRouter\nimport json, os\n\nrouter = APIRouter()\nSTATE_DIR = "/home/hack39/data/system"\n\n@router.get("/status")\nasync def sd_status():\n    path = os.path.join(STATE_DIR, "sd_state.json")\n    if not os.path.exists(path):\n        return {"sd_detectada": False, "status": "idle"}\n    with open(path) as f:\n        return json.load(f)\n',
+                  'from fastapi import APIRouter\nimport json, os\n\nrouter = APIRouter()\nSTATE_DIR = "/home/hack39/data/system"\n\n@router.get("/status")\nasync def sd_status():\n    path = os.path.join(STATE_DIR, "sd_state.json")\n    if not os.path.exists(path):\n        return {"sd_detectada": False, "status": "idle"}\n    with open(path) as f:\n        return json.load(f)\n'
               },
               {
                 id: "1-1-3-3",
@@ -73,9 +80,9 @@ const INITIAL_FILES: FileItem[] = [
                 type: "file",
                 path: "/ecoedge/backend/routers/network.py",
                 content:
-                  'from fastapi import APIRouter\nimport json, os\n\nrouter = APIRouter()\nSTATE_DIR = "/home/hack39/data/system"\n\n@router.get("/status")\nasync def network_status():\n    path = os.path.join(STATE_DIR, "network_state.json")\n    if not os.path.exists(path):\n        return {"mode": "client", "online": False}\n    with open(path) as f:\n        return json.load(f)\n',
-              },
-            ],
+                  'from fastapi import APIRouter\nimport json, os\n\nrouter = APIRouter()\nSTATE_DIR = "/home/hack39/data/system"\n\n@router.get("/status")\nasync def network_status():\n    path = os.path.join(STATE_DIR, "network_state.json")\n    if not os.path.exists(path):\n        return {"mode": "client", "online": False}\n    with open(path) as f:\n        return json.load(f)\n'
+              }
+            ]
           },
           {
             id: "1-1-4",
@@ -83,9 +90,9 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/backend/config.yaml",
             content:
-              "server:\n  host: 0.0.0.0\n  port: 8000\nlogging:\n  level: info\n",
-          },
-        ],
+              "server:\n  host: 0.0.0.0\n  port: 8000\nlogging:\n  level: info\n"
+          }
+        ]
       },
       {
         id: "1-2",
@@ -99,7 +106,7 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/frontend/package.json",
             content:
-              '{\n  "name": "ecoedge-dashboard",\n  "version": "1.0.0",\n  "scripts": {\n    "dev": "vite",\n    "build": "vite build",\n    "preview": "vite preview"\n  }\n}\n',
+              '{\n  "name": "ecoedge-dashboard",\n  "version": "1.0.0",\n  "scripts": {\n    "dev": "vite",\n    "build": "vite build",\n    "preview": "vite preview"\n  }\n}\n'
           },
           {
             id: "1-2-2",
@@ -113,7 +120,7 @@ const INITIAL_FILES: FileItem[] = [
                 type: "file",
                 path: "/ecoedge/frontend/src/main.tsx",
                 content:
-                  'import React from "react";\nimport ReactDOM from "react-dom/client";\nimport { App } from "./App";\n\nReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>\n);\n',
+                  'import React from "react";\nimport ReactDOM from "react-dom/client";\nimport { App } from "./App";\n\nReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(\n  <React.StrictMode>\n    <App />\n  </React.StrictMode>\n);\n'
               },
               {
                 id: "1-2-2-2",
@@ -121,7 +128,7 @@ const INITIAL_FILES: FileItem[] = [
                 type: "file",
                 path: "/ecoedge/frontend/src/App.tsx",
                 content:
-                  'import React from "react";\nimport { DevicesView } from "./views/DevicesView";\nimport { SdView } from "./views/SdView";\nimport { NetworkView } from "./views/NetworkView";\n\nexport const App = () => {\n  return (\n    <div className="app">\n      <h1>EcoEdge Dashboard</h1>\n      <SdView />\n      <NetworkView />\n      <DevicesView />\n    </div>\n  );\n};\n',
+                  'import React from "react";\nimport { DevicesView } from "./views/DevicesView";\nimport { SdView } from "./views/SdView";\nimport { NetworkView } from "./views/NetworkView";\n\nexport const App = () => {\n  return (\n    <div className="app">\n      <h1>EcoEdge Dashboard</h1>\n      <SdView />\n      <NetworkView />\n      <DevicesView />\n    </div>\n  );\n};\n'
               },
               {
                 id: "1-2-2-3",
@@ -135,7 +142,7 @@ const INITIAL_FILES: FileItem[] = [
                     type: "file",
                     path: "/ecoedge/frontend/src/views/DevicesView.tsx",
                     content:
-                      'import React, { useEffect, useState } from "react";\n\nexport const DevicesView: React.FC = () => {\n  const [devices, setDevices] = useState<any>({});\n\n  useEffect(() => {\n    const fetchDevices = async () => {\n      const res = await fetch("/api/devices");\n      const data = await res.json();\n      setDevices(data);\n    };\n    fetchDevices();\n    const id = setInterval(fetchDevices, 3000);\n    return () => clearInterval(id);\n  }, []);\n\n  const entries = Object.entries(devices);\n\n  return (\n    <section>\n      <h2>Dispositivos USB</h2>\n      {entries.length === 0 && <p>No hay dispositivos registrados.</p>}\n      {entries.length > 0 && (\n        <table>\n          <thead>\n            <tr>\n              <th>Dispositivo</th>\n              <th>Conectado</th>\n              <th>Válido</th>\n              <th>Nombre</th>\n              <th>ID</th>\n            </tr>\n          </thead>\n          <tbody>\n            {entries.map(([key, value]: any) => (\n              <tr key={key}>\n                <td>{value.device}</td>\n                <td>{value.connected ? \"Sí\" : \"No\"}</td>\n                <td>{value.valid ? \"Sí\" : \"No\"}</td>\n                <td>{value.config?.name || \"-\"}</td>\n                <td>{value.config?.id || \"-\"}</td>\n              </tr>\n            ))}\n          </tbody>\n        </table>\n      )}\n    </section>\n  );\n};\n',
+                      'import React, { useEffect, useState } from "react";\n\nexport const DevicesView: React.FC = () => {\n  const [devices, setDevices] = useState<any>({});\n\n  useEffect(() => {\n    const fetchDevices = async () => {\n      const res = await fetch("/api/devices");\n      const data = await res.json();\n      setDevices(data);\n    };\n    fetchDevices();\n    const id = setInterval(fetchDevices, 3000);\n    return () => clearInterval(id);\n  }, []);\n\n  const entries = Object.entries(devices);\n\n  return (\n    <section>\n      <h2>Dispositivos USB</h2>\n      {entries.length === 0 && <p>No hay dispositivos registrados.</p>}\n      {entries.length > 0 && (\n        <table>\n          <thead>\n            <tr>\n              <th>Dispositivo</th>\n              <th>Conectado</th>\n              <th>Válido</th>\n              <th>Nombre</th>\n              <th>ID</th>\n            </tr>\n          </thead>\n          <tbody>\n            {entries.map(([key, value]: any) => (\n              <tr key={key}>\n                <td>{value.device}</td>\n                <td>{value.connected ? "Sí" : "No"}</td>\n                <td>{value.valid ? "Sí" : "No"}</td>\n                <td>{value.config?.name || "-"}</td>\n                <td>{value.config?.id || "-"}</td>\n              </tr>\n            ))}\n          </tbody>\n        </table>\n      )}\n    </section>\n  );\n};\n'
                   },
                   {
                     id: "1-2-2-3-2",
@@ -143,7 +150,7 @@ const INITIAL_FILES: FileItem[] = [
                     type: "file",
                     path: "/ecoedge/frontend/src/views/SdView.tsx",
                     content:
-                      'import React, { useEffect, useState } from "react";\n\nexport const SdView: React.FC = () => {\n  const [sd, setSd] = useState<any | null>(null);\n\n  useEffect(() => {\n    const fetchSd = async () => {\n      const res = await fetch("/api/sd/status");\n      const data = await res.json();\n      setSd(data);\n    };\n    fetchSd();\n    const id = setInterval(fetchSd, 2000);\n    return () => clearInterval(id);\n  }, []);\n\n  if (!sd) return <p>Cargando estado de medio...</p>;\n\n  if (!sd.sd_detectada) {\n    return <p>No hay medio de almacenamiento detectado.</p>;\n  }\n\n  return (\n    <section>\n      <h2>Medio de almacenamiento</h2>\n      <p>Estado: {sd.status}</p>\n      {sd.config && (\n        <ul>\n          <li>Nombre: {sd.config.name}</li>\n          <li>ID: {sd.config.id}</li>\n        </ul>\n      )}\n    </section>\n  );\n};\n',
+                      'import React, { useEffect, useState } from "react";\n\nexport const SdView: React.FC = () => {\n  const [sd, setSd] = useState<any | null>(null);\n\n  useEffect(() => {\n    const fetchSd = async () => {\n      const res = await fetch("/api/sd/status");\n      const data = await res.json();\n      setSd(data);\n    };\n    fetchSd();\n    const id = setInterval(fetchSd, 2000);\n    return () => clearInterval(id);\n  }, []);\n\n  if (!sd) return <p>Cargando estado de medio...</p>;\n\n  if (!sd.sd_detectada) {\n    return <p>No hay medio de almacenamiento detectado.</p>;\n  }\n\n  return (\n    <section>\n      <h2>Medio de almacenamiento</h2>\n      <p>Estado: {sd.status}</p>\n      {sd.config && (\n        <ul>\n          <li>Nombre: {sd.config.name}</li>\n          <li>ID: {sd.config.id}</li>\n        </ul>\n      )}\n    </section>\n  );\n};\n'
                   },
                   {
                     id: "1-2-2-3-3",
@@ -151,9 +158,9 @@ const INITIAL_FILES: FileItem[] = [
                     type: "file",
                     path: "/ecoedge/frontend/src/views/NetworkView.tsx",
                     content:
-                      'import React, { useEffect, useState } from "react";\n\nexport const NetworkView: React.FC = () => {\n  const [net, setNet] = useState<any | null>(null);\n\n  useEffect(() => {\n    const fetchNet = async () => {\n      const res = await fetch("/api/network/status");\n      const data = await res.json();\n      setNet(data);\n    };\n    fetchNet();\n    const id = setInterval(fetchNet, 5000);\n    return () => clearInterval(id);\n  }, []);\n\n  if (!net) return <p>Cargando red...</p>;\n\n  return (\n    <section>\n      <h2>Estado de red</h2>\n      <p>Modo: {net.mode}</p>\n      <p>En línea: {net.online ? \"Sí\" : \"No\"}</p>\n    </section>\n  );\n};\n',
-                  },
-                ],
+                      'import React, { useEffect, useState } from "react";\n\nexport const NetworkView: React.FC = () => {\n  const [net, setNet] = useState<any | null>(null);\n\n  useEffect(() => {\n    const fetchNet = async () => {\n      const res = await fetch("/api/network/status");\n      const data = await res.json();\n      setNet(data);\n    };\n    fetchNet();\n    const id = setInterval(fetchNet, 5000);\n    return () => clearInterval(id);\n  }, []);\n\n  if (!net) return <p>Cargando red...</p>;\n\n  return (\n    <section>\n      <h2>Estado de red</h2>\n      <p>Modo: {net.mode}</p>\n      <p>En línea: {net.online ? "Sí" : "No"}</p>\n    </section>\n  );\n};\n'
+                  }
+                ]
               },
               {
                 id: "1-2-2-4",
@@ -161,11 +168,11 @@ const INITIAL_FILES: FileItem[] = [
                 type: "file",
                 path: "/ecoedge/frontend/src/styles.css",
                 content:
-                  "body {\n  font-family: system-ui, sans-serif;\n  margin: 0;\n  padding: 1rem;\n  background: #050816;\n  color: #f9fafb;\n}\n\nh1 {\n  margin-bottom: 1rem;\n}\n\nsection {\n  margin-bottom: 1.5rem;\n  padding: 1rem;\n  border-radius: 0.5rem;\n  background: #0b1120;\n}\n",
-              },
-            ],
-          },
-        ],
+                  "body {\n  font-family: system-ui, sans-serif;\n  margin: 0;\n  padding: 1rem;\n  background: #050816;\n  color: #f9fafb;\n}\n\nh1 {\n  margin-bottom: 1rem;\n}\n\nsection {\n  margin-bottom: 1.5rem;\n  padding: 1rem;\n  border-radius: 0.5rem;\n  background: #0b1120;\n}\n"
+              }
+            ]
+          }
+        ]
       },
       {
         id: "1-3",
@@ -179,7 +186,7 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/workers/usb_worker.py",
             content:
-              "# Worker para detección y gestión de dispositivos USB\nimport os, json, time, subprocess\nfrom datetime import datetime, timezone\n\nSTATE_DIR = '/home/hack39/data/system'\nDEVICES_JSON = os.path.join(STATE_DIR, 'devices.json')\n\n# ... implementación recortada para demo\n",
+              "# Worker para detección y gestión de dispositivos USB\nimport os, json, time, subprocess\nfrom datetime import datetime, timezone\n\nSTATE_DIR = '/home/hack39/data/system'\nDEVICES_JSON = os.path.join(STATE_DIR, 'devices.json')\n\n# ... implementación recortada para demo\n"
           },
           {
             id: "1-3-2",
@@ -187,7 +194,7 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/workers/network_worker.py",
             content:
-              "# Worker para monitoreo de conectividad y modo AP\nimport subprocess, time, json, os\n\nSTATE_DIR = '/home/hack39/data/system'\nNETWORK_JSON = os.path.join(STATE_DIR, 'network_state.json')\n\n# ... implementación recortada para demo\n",
+              "# Worker para monitoreo de conectividad y modo AP\nimport subprocess, time, json, os\n\nSTATE_DIR = '/home/hack39/data/system'\nNETWORK_JSON = os.path.join(STATE_DIR, 'network_state.json')\n\n# ... implementación recortada para demo\n"
           },
           {
             id: "1-3-3",
@@ -195,9 +202,9 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/workers/ingestor.py",
             content:
-              "# Ingestor de datos desde el medio USB hacia el almacenamiento interno\n\nimport shutil, os, json\n\n# ... implementación recortada\n",
-          },
-        ],
+              "# Ingestor de datos desde el medio USB hacia el almacenamiento interno\n\nimport shutil, os, json\n\n# ... implementación recortada\n"
+          }
+        ]
       },
       {
         id: "1-4",
@@ -211,7 +218,7 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/models/models.json",
             content:
-              '{\n  "models": [\n    {\n      "name": "Audio aves generico",\n      "image": "ecoedge/model_audio_aves:1.0",\n      "type": "audio",\n      "enabled": true,\n      "default": true,\n      "container_name": "model_audio_aves"\n    },\n    {\n      "name": "Clasificador mamiferos imagen",\n      "image": "ecoedge/model_imagen_mamiferos:1.0",\n      "type": "image",\n      "enabled": false,\n      "default": false,\n      "container_name": "model_img_mamiferos"\n    }\n  ]\n}\n',
+              '{\n  "models": [\n    {\n      "name": "Audio aves generico",\n      "image": "ecoedge/model_audio_aves:1.0",\n      "type": "audio",\n      "enabled": true,\n      "default": true,\n      "container_name": "model_audio_aves"\n    },\n    {\n      "name": "Clasificador mamiferos imagen",\n      "image": "ecoedge/model_imagen_mamiferos:1.0",\n      "type": "image",\n      "enabled": false,\n      "default": false,\n      "container_name": "model_img_mamiferos"\n    }\n  ]\n}\n'
           },
           {
             id: "1-4-2",
@@ -219,9 +226,9 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/models/README.md",
             content:
-              "# Modelos de IA\n\nEste directorio contiene la definición de modelos desplegados mediante contenedores Docker para ejecutar en el borde.\n",
-          },
-        ],
+              "# Modelos de IA\n\nEste directorio contiene la definición de modelos desplegados mediante contenedores Docker para ejecutar en el borde.\n"
+          }
+        ]
       },
       {
         id: "1-5",
@@ -235,7 +242,7 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/docs/arquitectura.md",
             content:
-              "# Arquitectura EcoEdge\n\n- Cómputo de borde con Raspberry Pi\n- Workers para USB, red y modelos\n- Backend FastAPI\n- Dashboard web\n",
+              "# Arquitectura EcoEdge\n\n- Cómputo de borde con Raspberry Pi\n- Workers para USB, red y modelos\n- Backend FastAPI\n- Dashboard web\n"
           },
           {
             id: "1-5-2",
@@ -243,7 +250,7 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/docs/metodologia.md",
             content:
-              "# Metodología de desarrollo\n\nSe empleó un enfoque MVP + desarrollo ágil + prototipado rápido, con énfasis en pruebas en campo.\n",
+              "# Metodología de desarrollo\n\nSe empleó un enfoque MVP + desarrollo ágil + prototipado rápido, con énfasis en pruebas en campo.\n"
           },
           {
             id: "1-5-3",
@@ -251,11 +258,11 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/ecoedge/docs/ap_poc_notas.txt",
             content:
-              "- Probar hostapd en segunda Raspberry\n- Documentar SSID, password y rango DHCP\n- Verificar acceso al dashboard desde celular\n",
-          },
-        ],
-      },
-    ],
+              "- Probar hostapd en segunda Raspberry\n- Documentar SSID, password y rango DHCP\n- Verificar acceso al dashboard desde celular\n"
+          }
+        ]
+      }
+    ]
   },
   {
     id: "2",
@@ -275,7 +282,7 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/data/system/devices.json",
             content:
-              '{\n  "sdb1": {\n    "device": "sdb1",\n    "mount_point": "/media/usb_sdb1",\n    "connected": true,\n    "valid": true,\n    "config": {\n      "name": "Camara trampa 1",\n      "id": "TCAM-001",\n      "location": {\n        "description": "Selva baja caducifolia",\n        "lat": 17.1234,\n        "lng": -96.1234\n      }\n    },\n    "last_seen": "2025-11-27T05:10:00Z"\n  }\n}\n',
+              '{\n  "sdb1": {\n    "device": "sdb1",\n    "mount_point": "/media/usb_sdb1",\n    "connected": true,\n    "valid": true,\n    "config": {\n      "name": "Camara trampa 1",\n      "id": "TCAM-001",\n      "location": {\n        "description": "Selva baja caducifolia",\n        "lat": 17.1234,\n        "lng": -96.1234\n      }\n    },\n    "last_seen": "2025-11-27T05:10:00Z"\n  }\n}\n'
           },
           {
             id: "2-1-2",
@@ -283,7 +290,7 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/data/system/sd_state.json",
             content:
-              '{\n  "sd_detectada": true,\n  "valid": true,\n  "device": "sdb1",\n  "mount_point": "/media/usb_sdb1",\n  "status": "ready",\n  "last_update": "2025-11-27T05:10:05Z"\n}\n',
+              '{\n  "sd_detectada": true,\n  "valid": true,\n  "device": "sdb1",\n  "mount_point": "/media/usb_sdb1",\n  "status": "ready",\n  "last_update": "2025-11-27T05:10:05Z"\n}\n'
           },
           {
             id: "2-1-3",
@@ -291,9 +298,16 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/data/system/network_state.json",
             content:
-              '{\n  "mode": "client",\n  "online": true,\n  "last_change": "2025-11-26T22:00:00Z",\n  "last_update": "2025-11-27T05:10:10Z"\n}\n',
+              '{\n  "mode": "client",\n  "online": true,\n  "last_change": "2025-11-26T22:00:00Z",\n  "last_update": "2025-11-27T05:10:10Z"\n}\n'
           },
-        ],
+          {
+            id: "2-1-4",
+            name: "models.json",
+            type: "file",
+            path: "/data/system/models.json",
+            content: '{ "models": ["birdnet-lite", "mammals-lite","sonidos"] }'
+          }
+        ]
       },
       {
         id: "2-2",
@@ -315,19 +329,80 @@ const INITIAL_FILES: FileItem[] = [
                 children: [
                   {
                     id: "2-2-1-1-1",
-                    name: "IMG_0001.JPG",
+                    name: "IMG_0001.png",
                     type: "file",
-                    path: "/data/projects/TCAM-001/raw/IMG_0001.JPG",
-                    content: "/mock/path/tcam001/IMG_0001.JPG",
+                    path: "/data/projects/TCAM-001/raw/IMG_0001.png",
+                    content:
+                      "https://www.guatemala.com/fotos/2020/08/coatie-guatemala-camara-trampa.jpg"
                   },
                   {
                     id: "2-2-1-1-2",
-                    name: "IMG_0002.JPG",
+                    name: "IMG_0002.png",
                     type: "file",
-                    path: "/data/projects/TCAM-001/raw/IMG_0002.JPG",
-                    content: "/mock/path/tcam001/IMG_0002.JPG",
+                    path: "/data/projects/TCAM-001/raw/IMG_0002.png",
+                    content:
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-htk03Q3AiyQNv6ogEQ7SM2WVbwUQWqLE4A&s"
                   },
-                ],
+                  {
+                    id: "2-2-1-1-3",
+                    name: "IMG_0003.png",
+                    type: "file",
+                    path: "/data/projects/TCAM-001/raw/IMG_0003.png",
+                    content:
+                      "https://i0.wp.com/terrapeninsular.org/wp-content/uploads/2023/03/Camara-trampa-5.jpg?resize=800%2C450&ssl=1"
+                  },
+                  {
+                    id: "2-2-1-1-4",
+                    name: "IMG_0004.png",
+                    type: "file",
+                    path: "/data/projects/TCAM-001/raw/IMG_0004.png",
+                    content:
+                      "https://i0.wp.com/terrapeninsular.org/wp-content/uploads/2023/03/Camara-trampa-3.jpg?resize=800%2C450&ssl=1"
+                  },
+                  {
+                    id: "2-2-1-1-5",
+                    name: "IMG_0005.png",
+                    type: "file",
+                    path: "/data/projects/TCAM-001/raw/IMG_0005.png",
+                    content:
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJeqTk9CME36YB1Q9mzgATmMngKgLqjG4_mw&s"
+                  },
+                  {
+                    id: "2-2-1-1-6",
+                    name: "IMG_0006.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-001/raw/IMG_0006.JPG",
+                    content: "/mock/path/tcam001/IMG_0006.JPG"
+                  },
+                  {
+                    id: "2-2-1-1-7",
+                    name: "IMG_0007.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-001/raw/IMG_0007.JPG",
+                    content: "/mock/path/tcam001/IMG_0007.JPG"
+                  },
+                  {
+                    id: "2-2-1-1-8",
+                    name: "IMG_0008.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-001/raw/IMG_0008.JPG",
+                    content: "/mock/path/tcam001/IMG_0008.JPG"
+                  },
+                  {
+                    id: "2-2-1-1-9",
+                    name: "IMG_0009.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-001/raw/IMG_0009.JPG",
+                    content: "/mock/path/tcam001/IMG_0009.JPG"
+                  },
+                  {
+                    id: "2-2-1-1-10",
+                    name: "IMG_0010.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-001/raw/IMG_0010.JPG",
+                    content: "/mock/path/tcam001/IMG_0010.JPG"
+                  }
+                ]
               },
               {
                 id: "2-2-1-2",
@@ -341,9 +416,32 @@ const INITIAL_FILES: FileItem[] = [
                     type: "file",
                     path: "/data/projects/TCAM-001/processed/detections.json",
                     content:
-                      '{\n  "IMG_0001.JPG": [{ "species": "Odocoileus virginianus", "confidence": 0.92 }]\n}\n',
-                  },
-                ],
+                      "{\n" +
+                      '  "IMG_0001.JPG": [\n' +
+                      '    { "species": "Odocoileus virginianus", "confidence": 0.92 }\n' +
+                      "  ],\n" +
+                      '  "IMG_0002.JPG": [\n' +
+                      '    { "species": "Procyon lotor", "confidence": 0.88 }\n' +
+                      "  ],\n" +
+                      '  "IMG_0003.JPG": [\n' +
+                      '    { "species": "Canis latrans", "confidence": 0.74 },\n' +
+                      '    { "species": "Odocoileus virginianus", "confidence": 0.41 }\n' +
+                      "  ],\n" +
+                      '  "IMG_0004.JPG": [\n' +
+                      '    { "species": "Urocyon cinereoargenteus", "confidence": 0.81 }\n' +
+                      "  ],\n" +
+                      '  "IMG_0005.JPG": [\n' +
+                      '    { "species": "Sciurus niger", "confidence": 0.67 }\n' +
+                      "  ],\n" +
+                      '  "IMG_0006.JPG": [\n' +
+                      '    { "species": "Odocoileus hemionus", "confidence": 0.93 }\n' +
+                      "  ],\n" +
+                      '  "IMG_0007.JPG": [\n' +
+                      '    { "species": "Sylvilagus floridanus", "confidence": 0.79 },\n' +
+                      '    { "species": "Procyon lotor", "confidence": 0.36 }\n' +
+                      "  ],\n}"
+                  }
+                ]
               },
               {
                 id: "2-2-1-3",
@@ -351,9 +449,9 @@ const INITIAL_FILES: FileItem[] = [
                 type: "file",
                 path: "/data/projects/TCAM-001/log.txt",
                 content:
-                  "2025-11-27 05:00:01 - Inicio de ingesta desde sdb1\n2025-11-27 05:02:30 - Copia completada\n2025-11-27 05:05:10 - Procesamiento IA completado\n",
-              },
-            ],
+                  "2025-11-27 05:00:01 - Inicio de ingesta desde sdb1\n2025-11-27 05:02:30 - Copia completada\n2025-11-27 05:05:10 - Procesamiento IA completado\n"
+              }
+            ]
           },
           {
             id: "2-2-2",
@@ -366,20 +464,304 @@ const INITIAL_FILES: FileItem[] = [
                 name: "raw",
                 type: "folder",
                 path: "/data/projects/TCAM-002/raw",
-                children: [],
+                children: [
+                  {
+                    id: "2-2-2-1-1",
+                    name: "IMG_0001.png",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0001.png",
+                    content:
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtdBj4lSjvqUp40vFGjMZsnWYIMRINQeNxSA&s"
+                  },
+                  {
+                    id: "2-2-2-1-2",
+                    name: "IMG_0002.png",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0002.png",
+                    content:
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR3_mwg7NCiLkUF3Q1Rfr9OFKdN74OXwD214Q&s"
+                  },
+                  {
+                    id: "2-2-2-1-3",
+                    name: "IMG_0003.png",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0003.png",
+                    content:
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe_ukyh0hfWQVZO0aUSNTZMivDlkTe_1CQ8A&s"
+                  },
+                  {
+                    id: "2-2-2-1-4",
+                    name: "IMG_0004.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0004.JPG",
+                    content: "/mock/path/tcam002/IMG_0004.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-5",
+                    name: "IMG_0005.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0005.JPG",
+                    content: "/mock/path/tcam002/IMG_0005.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-6",
+                    name: "IMG_0006.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0006.JPG",
+                    content: "/mock/path/tcam002/IMG_0006.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-7",
+                    name: "IMG_0007.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0007.JPG",
+                    content: "/mock/path/tcam002/IMG_0007.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-8",
+                    name: "IMG_0008.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0008.JPG",
+                    content: "/mock/path/tcam002/IMG_0008.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-9",
+                    name: "IMG_0009.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0009.JPG",
+                    content: "/mock/path/tcam002/IMG_0009.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-10",
+                    name: "IMG_0010.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0010.JPG",
+                    content: "/mock/path/tcam002/IMG_0010.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-11",
+                    name: "IMG_0011.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0011.JPG",
+                    content: "/mock/path/tcam002/IMG_0011.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-12",
+                    name: "IMG_0012.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0012.JPG",
+                    content: "/mock/path/tcam002/IMG_0012.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-13",
+                    name: "IMG_0013.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0013.JPG",
+                    content: "/mock/path/tcam002/IMG_0013.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-14",
+                    name: "IMG_0014.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0014.JPG",
+                    content: "/mock/path/tcam002/IMG_0014.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-15",
+                    name: "IMG_0015.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0015.JPG",
+                    content: "/mock/path/tcam002/IMG_0015.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-16",
+                    name: "IMG_0016.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0016.JPG",
+                    content: "/mock/path/tcam002/IMG_0016.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-17",
+                    name: "IMG_0017.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0017.JPG",
+                    content: "/mock/path/tcam002/IMG_0017.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-18",
+                    name: "IMG_0018.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0018.JPG",
+                    content: "/mock/path/tcam002/IMG_0018.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-19",
+                    name: "IMG_0019.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0019.JPG",
+                    content: "/mock/path/tcam002/IMG_0019.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-20",
+                    name: "IMG_0020.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0020.JPG",
+                    content: "/mock/path/tcam002/IMG_0020.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-21",
+                    name: "IMG_0021.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0021.JPG",
+                    content: "/mock/path/tcam002/IMG_0021.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-22",
+                    name: "IMG_0022.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0022.JPG",
+                    content: "/mock/path/tcam002/IMG_0022.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-23",
+                    name: "IMG_0023.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0023.JPG",
+                    content: "/mock/path/tcam002/IMG_0023.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-24",
+                    name: "IMG_0024.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0024.JPG",
+                    content: "/mock/path/tcam002/IMG_0024.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-25",
+                    name: "IMG_0025.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0025.JPG",
+                    content: "/mock/path/tcam002/IMG_0025.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-26",
+                    name: "IMG_0026.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0026.JPG",
+                    content: "/mock/path/tcam002/IMG_0026.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-27",
+                    name: "IMG_0027.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0027.JPG",
+                    content: "/mock/path/tcam002/IMG_0027.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-28",
+                    name: "IMG_0028.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0028.JPG",
+                    content: "/mock/path/tcam002/IMG_0028.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-29",
+                    name: "IMG_0029.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0029.JPG",
+                    content: "/mock/path/tcam002/IMG_0029.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-30",
+                    name: "IMG_0030.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0030.JPG",
+                    content: "/mock/path/tcam002/IMG_0030.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-31",
+                    name: "IMG_0031.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0031.JPG",
+                    content: "/mock/path/tcam002/IMG_0031.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-32",
+                    name: "IMG_0032.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0032.JPG",
+                    content: "/mock/path/tcam002/IMG_0032.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-33",
+                    name: "IMG_0033.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0033.JPG",
+                    content: "/mock/path/tcam002/IMG_0033.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-34",
+                    name: "IMG_0034.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0034.JPG",
+                    content: "/mock/path/tcam002/IMG_0034.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-35",
+                    name: "IMG_0035.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0035.JPG",
+                    content: "/mock/path/tcam002/IMG_0035.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-36",
+                    name: "IMG_0036.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0036.JPG",
+                    content: "/mock/path/tcam002/IMG_0036.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-37",
+                    name: "IMG_0037.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0037.JPG",
+                    content: "/mock/path/tcam002/IMG_0037.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-38",
+                    name: "IMG_0038.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0038.JPG",
+                    content: "/mock/path/tcam002/IMG_0038.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-39",
+                    name: "IMG_0039.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0039.JPG",
+                    content: "/mock/path/tcam002/IMG_0039.JPG"
+                  },
+                  {
+                    id: "2-2-2-1-40",
+                    name: "IMG_0040.JPG",
+                    type: "file",
+                    path: "/data/projects/TCAM-002/raw/IMG_0040.JPG",
+                    content: "/mock/path/tcam002/IMG_0040.JPG"
+                  }
+                ]
               },
               {
                 id: "2-2-2-2",
                 name: "processed",
                 type: "folder",
                 path: "/data/projects/TCAM-002/processed",
-                children: [],
-              },
-            ],
-          },
-        ],
-      },
-    ],
+                children: []
+              }
+            ]
+          }
+        ]
+      }
+    ]
   },
   {
     id: "3",
@@ -399,7 +781,7 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/infra/systemd/usbworker.service",
             content:
-              "[Unit]\nDescription=USB Worker for EcoEdge\n\n[Service]\nWorkingDirectory=/home/hack39/workers\nExecStart=/usr/bin/python3 /home/hack39/workers/usb_worker.py\nRestart=always\nRestartSec=3\nUser=hack39\n\n[Install]\nWantedBy=multi-user.target\n",
+              "[Unit]\nDescription=USB Worker for EcoEdge\n\n[Service]\nWorkingDirectory=/home/hack39/workers\nExecStart=/usr/bin/python3 /home/hack39/workers/usb_worker.py\nRestart=always\nRestartSec=3\nUser=hack39\n\n[Install]\nWantedBy=multi-user.target\n"
           },
           {
             id: "3-1-2",
@@ -407,9 +789,9 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/infra/systemd/backend.service",
             content:
-              "[Unit]\nDescription=FastAPI backend for EcoEdge\n\n[Service]\nWorkingDirectory=/home/hack39/backend\nExecStart=/usr/bin/uvicorn main:app --host 0.0.0.0 --port 8000\nRestart=always\nRestartSec=3\nUser=hack39\n\n[Install]\nWantedBy=multi-user.target\n",
-          },
-        ],
+              "[Unit]\nDescription=FastAPI backend for EcoEdge\n\n[Service]\nWorkingDirectory=/home/hack39/backend\nExecStart=/usr/bin/uvicorn main:app --host 0.0.0.0 --port 8000\nRestart=always\nRestartSec=3\nUser=hack39\n\n[Install]\nWantedBy=multi-user.target\n"
+          }
+        ]
       },
       {
         id: "3-2",
@@ -423,11 +805,11 @@ const INITIAL_FILES: FileItem[] = [
             type: "file",
             path: "/infra/netplan/50-cloud-init.yaml",
             content:
-              "network:\n  version: 2\n  renderer: networkd\n  ethernets:\n    eth0:\n      dhcp4: true\n",
-          },
-        ],
-      },
-    ],
+              "network:\n  version: 2\n  renderer: networkd\n  ethernets:\n    eth0:\n      dhcp4: true\n"
+          }
+        ]
+      }
+    ]
   },
   {
     id: "4",
@@ -441,7 +823,7 @@ const INITIAL_FILES: FileItem[] = [
         type: "file",
         path: "/scripts/dev-start.sh",
         content:
-          "#!/usr/bin/env bash\n\n# Levanta backend y frontend en modo desarrollo\n(cd /ecoedge/backend && uvicorn main:app --reload &)\n(cd /ecoedge/frontend && npm run dev &)\n",
+          "#!/usr/bin/env bash\n\n# Levanta backend y frontend en modo desarrollo\n(cd /ecoedge/backend && uvicorn main:app --reload &)\n(cd /ecoedge/frontend && npm run dev &)\n"
       },
       {
         id: "4-2",
@@ -449,48 +831,58 @@ const INITIAL_FILES: FileItem[] = [
         type: "file",
         path: "/scripts/check-status.sh",
         content:
-          "#!/usr/bin/env bash\n\necho 'usbworker:'\nsystemctl status usbworker --no-pager -n 2 || true\n\necho 'backend:'\nsystemctl status backend --no-pager -n 2 || true\n",
+          "#!/usr/bin/env bash\n\necho 'usbworker:'\nsystemctl status usbworker --no-pager -n 2 || true\n\necho 'backend:'\nsystemctl status backend --no-pager -n 2 || true\n"
       },
-    ],
-  },
+      {
+        id: "4-3",
+        name: "filter-animal.sh",
+        type: "file",
+        path: "/scripts/filter-animal.sh",
+        content:
+          "# Filtrar Jaguares con confianza mayor al 90%\ndataset = [...] # Datos crudos\njaguares = [registro for registro in dataset if registro['especie'] == 'Panthera onca' and registro['confianza'] > 0.90]\nprint(f'Jaguares confirmados: {len(jaguares)}')\n"
+      }
+    ]
+  }
 ];
 
 export default function FileExplorer() {
-  const [selectedId, setSelectedId] = useState<string | null>("1-1-1")
-  const [files, setFiles] = useState(INITIAL_FILES)
-  const [searchTerm, setSearchTerm] = useState("")
-  const [isCreating, setIsCreating] = useState(false)
-  const [newItemName, setNewItemName] = useState("")
+  const [selectedId, setSelectedId] = useState<string | null>("1-1-1");
+  const [files, setFiles] = useState(INITIAL_FILES);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [isCreating, setIsCreating] = useState(false);
+  const [newItemName, setNewItemName] = useState("");
 
   const findFileById = (items: FileItem[], id: string): FileItem | null => {
     for (const item of items) {
-      if (item.id === id) return item
+      if (item.id === id) return item;
       if (item.children) {
-        const found = findFileById(item.children, id)
-        if (found) return found
+        const found = findFileById(item.children, id);
+        if (found) return found;
       }
     }
-    return null
-  }
+    return null;
+  };
 
-  const selectedFile = selectedId ? findFileById(files, selectedId) : null
+  const selectedFile = selectedId ? findFileById(files, selectedId) : null;
 
   const filteredFiles = (items: FileItem[]): FileItem[] => {
-    if (!searchTerm) return items
+    if (!searchTerm) return items;
     return items
       .filter((item) => {
-        const matches = item.name.toLowerCase().includes(searchTerm.toLowerCase())
+        const matches = item.name
+          .toLowerCase()
+          .includes(searchTerm.toLowerCase());
         if (item.children) {
-          const filteredChildren = filteredFiles(item.children)
-          return matches || filteredChildren.length > 0
+          const filteredChildren = filteredFiles(item.children);
+          return matches || filteredChildren.length > 0;
         }
-        return matches
+        return matches;
       })
       .map((item) => ({
         ...item,
-        children: item.children ? filteredFiles(item.children) : item.children,
-      }))
-  }
+        children: item.children ? filteredFiles(item.children) : item.children
+      }));
+  };
 
   return (
     <div className="flex h-screen bg-background">
@@ -498,7 +890,6 @@ export default function FileExplorer() {
       <div className="w-80 border-r border-border bg-sidebar flex flex-col">
         {/* Header */}
         <div className="p-4 border-b border-border">
-          
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
             <Input
@@ -512,7 +903,12 @@ export default function FileExplorer() {
 
         {/* File Tree */}
         <div className="flex-1 overflow-y-auto p-2">
-          <FileTree items={filteredFiles(files)} selectedId={selectedId} onSelect={setSelectedId} level={0} />
+          <FileTree
+            items={filteredFiles(files)}
+            selectedId={selectedId}
+            onSelect={setSelectedId}
+            level={0}
+          />
         </div>
       </div>
 
@@ -549,5 +945,5 @@ export default function FileExplorer() {
         </div>
       </div>
     </div>
-  )
+  );
 }
