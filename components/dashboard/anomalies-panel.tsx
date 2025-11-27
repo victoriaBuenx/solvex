@@ -39,11 +39,11 @@ export default function AnomaliesPanel() {
   const getSeverityColor = (severity: string) => {
     switch (severity) {
       case "error":
-        return "bg-red-500/20 text-red-300 border-red-500/30"
+        return "bg-red-500/20 text-red-600 border-red-500/30"
       case "warning":
-        return "bg-yellow-500/20 text-yellow-300 border-yellow-500/30"
+        return "bg-yellow-500/20 text-amber-600 border-yellow-500/30"
       default:
-        return "bg-blue-500/20 text-blue-300 border-blue-500/30"
+        return "bg-blue-500/20 text-blue-700 border-blue-500/30"
     }
   }
 
@@ -51,7 +51,7 @@ export default function AnomaliesPanel() {
     <Card className="border-border bg-card/50 backdrop-blur">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <AlertTriangle className="w-5 h-5 text-yellow-400" />
+          <AlertTriangle className="w-5 h-5 text-amber-600" />
           Anomalías Detectadas
         </CardTitle>
         <CardDescription>Problemas en la integridad de datos</CardDescription>
