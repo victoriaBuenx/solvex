@@ -7,6 +7,7 @@ import RecordsPanel from "@/components/dashboard/records-panel";
 import ModelResultsPanel from "@/components/dashboard/model-results-panel";
 import SystemLogsPanel from "@/components/dashboard/system-logs-panel";
 import AnomaliesPanel from "@/components/dashboard/anomalies-panel";
+import carga_archivos from "@/components/dashboard/carga_archivos";
 import { DeviceCard } from "@/components/ui/deviceCard";
 import { MdOutlineSdStorage } from "react-icons/md";
 import { CiUsb } from "react-icons/ci";
@@ -25,6 +26,7 @@ const API_URL = "http://10.156.124.132:8000/api/devices"
 
 
 import ModelsPanel from "@/components/dashboard/models";
+import CargaArchivos from "@/components/dashboard/carga_archivos";
 
 export default function DashboardPage() {
   const fetchDevices = async() => {
@@ -103,6 +105,11 @@ const [devices, setDevices] = useState();
                   <SDProgressPanel />
                   <RecordsPanel />
                 </div>
+                {/*Div de la carga de archvios */}
+                <div className="mb-5">
+                  <CargaArchivos />
+                </div>
+
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   <div className="lg:col-span-2">
                     <ModelResultsPanel />
