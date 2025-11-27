@@ -11,6 +11,7 @@ import {
 import { Badge } from "@/components/ui/badge";
 
 import IMPORTED_JSON_DATA from "@/bdd/conabio_full_gps.json";
+import { Spinner } from "../ui/spinner";
 
 interface DetectionData {
   uuid?: string;
@@ -281,7 +282,14 @@ export default function ModelResultsPanel() {
             <div className="space-y-2">
               <div className="flex justify-between text-xs text-muted-foreground">
                 <span>Progreso</span>
-                <span>{model.progress}%</span>
+                <div>
+                  {
+                    model.progress !== 100 && (
+                      <Spinner className="w-4 h-4 mr-2 inline-block text-purple-800" />
+                    ) 
+                  }
+                  <span>{model.progress}%</span>
+                </div>
               </div>
               <div className="w-full bg-secondary/30 rounded-full h-2">
                 <div
