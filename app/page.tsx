@@ -30,6 +30,7 @@ import ModelsPanel from "@/components/dashboard/models";
 import CargaArchivos from "@/components/dashboard/carga_archivos";
 import { StatusBadge } from "@/components/dashboard/statusBadge";
 import FileManager from "@/components/dashboard/FileManager";
+import { SettingsPage } from "@/components/dashboard/SettingsPage";
 
 export default function DashboardPage() {
   const fetchDevices = async() => {
@@ -68,6 +69,39 @@ export default function DashboardPage() {
 
 const [devices, setDevices] = useState();
 const [empty, setEmpty] = useState(true)
+
+  // Estado para temperatura y procesos activos (valores dinámicos)
+  const [temperature, setTemperature] = useState(52.3)
+  const [processes, setProcesses] = useState([
+    { name: "python-ai-model", cpu: 18.5 },
+    { name: "sd-sync-service", cpu: 8.2 },
+    { name: "data-processor", cpu: 5.1 },
+    { name: "logger-daemon", cpu: 1.3 },
+  ])
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      // Actualizar temperatura con pequeña variación (-0.5..+0.5)
+      setTemperature(prev => {
+        const delta = (Math.random() - 0.5) * 1.0
+        let next = Math.round((prev + delta) * 10) / 10
+        if (next < 25) next = 25
+        if (next > 90) next = 90
+        return next
+      })
+
+      // Actualizar procesos: variación pequeña (-1..+1)
+      setProcesses(prev => prev.map(p => {
+        const delta = (Math.random() - 0.5) * 2
+        let next = Math.round((p.cpu + delta) * 10) / 10
+        if (next < 0) next = 0
+        if (next > 100) next = 100
+        return { ...p, cpu: next }
+      }))
+    }, 1500)
+
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <div className="flex min-h-screen bg-background text-foreground md:pl-64">
@@ -139,86 +173,7 @@ const [empty, setEmpty] = useState(true)
           )}
 
           {activeTab === "system-info" && (
-            <div className="space-y-6">
-              <Card className="border-border bg-card/50 backdrop-blur">
-                <CardHeader>
-                  <CardTitle>Información del Sistema</CardTitle>
-                  <CardDescription>
-                    Detalles técnicos de la Raspberry Pi
-                  </CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-4">
-                      <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">
-                          Modelo
-                        </p>
-                        <p className="font-semibold text-lg">Raspberry Pi 4B</p>
-                      </div>
-                      <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">
-                          CPU
-                        </p>
-                        <p className="font-semibold">
-                          ARM Cortex-A72 4x 1.5GHz
-                        </p>
-                      </div>
-                      <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">
-                          RAM Disponible
-                        </p>
-                        <p className="font-semibold text-green-400">
-                          6.2 GB / 8 GB
-                        </p>
-                      </div>
-                    </div>
-                    <div className="space-y-4">
-                      <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">
-                          Uptime
-                        </p>
-                        <p className="font-semibold">45 días, 12 horas</p>
-                      </div>
-                      <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">
-                          Temperatura
-                        </p>
-                        <p className="font-semibold text-blue-400">52.3°C</p>
-                      </div>
-                      <div className="bg-muted/30 rounded-lg p-4">
-                        <p className="text-xs text-muted-foreground mb-1">
-                          Almacenamiento
-                        </p>
-                        <p className="font-semibold">243.5 GB / 256 GB</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="mt-6 bg-muted/30 rounded-lg p-4 space-y-3">
-                    <h3 className="font-semibold text-sm">Procesos Activos</h3>
-                    <div className="space-y-2 text-sm font-mono">
-                      <div className="flex justify-between text-muted-foreground">
-                        <span>python-ai-model</span>
-                        <span>18.5% CPU</span>
-                      </div>
-                      <div className="flex justify-between text-muted-foreground">
-                        <span>sd-sync-service</span>
-                        <span>8.2% CPU</span>
-                      </div>
-                      <div className="flex justify-between text-muted-foreground">
-                        <span>data-processor</span>
-                        <span>5.1% CPU</span>
-                      </div>
-                      <div className="flex justify-between text-muted-foreground">
-                        <span>logger-daemon</span>
-                        <span>1.3% CPU</span>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-            </div>
+            <SettingsPage />
           )}
           {activeTab === "models" && (
             <div>
