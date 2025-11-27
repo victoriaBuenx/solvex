@@ -112,9 +112,10 @@ const [empty, setEmpty] = useState(true)
         <div className="max-w-7xl mx-auto">
           <div className="mb-8 flex items-center justify-between">
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold text-balance mb-2">
+              {/* <h1 className="text-3xl md:text-4xl font-bold text-balance mb-2">
                 BioEdge
-              </h1>
+              </h1> */}
+              <img src="BioEdge_sinfondo.png" alt="Logo de BioEdge" width={150} height={50} />
               <p className="text-muted-foreground">
                 Panel de control para ingesta de datos, procesamiento y
                 monitoreo
