@@ -18,7 +18,7 @@ export default function CargaArchivos() {
     size: "19.2 GB",
     images: 1240,
     audio: 438,
-    status: "Listo",
+    status: "Listo para sincronizar",
   };
 
   const metadataData = {

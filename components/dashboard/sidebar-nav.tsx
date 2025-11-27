@@ -69,7 +69,7 @@ export default function SidebarNav({
                 : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
             )}
           >
-            <span className="flex-shrink-0">{tab.icon}</span>
+            <span className="shrink-0">{tab.icon}</span>
             <span className="hidden md:inline">{tab.label}</span>
           </button>
         ))}
