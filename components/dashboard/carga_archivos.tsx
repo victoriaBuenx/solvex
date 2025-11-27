@@ -15,11 +15,34 @@ import { MdOutlinePlaylistAddCheck } from "react-icons/md";
 export default function CargaArchivos() {
   const multimediaData = {
     count: 1678,
-    size: "19.2 GB",
+    size: "1.9 GB",
+    originalSize: "2.3 GB",
     images: 1240,
     audio: 438,
     status: "Listo para sincronizar",
   };
+
+  function parseSize(size: string) {
+    // expects strings like '1.9 GB', '45 MB', '123 KB'
+    const parts = String(size).trim().split(/\s+/)
+    if (parts.length === 0) return 0
+    const value = parseFloat(parts[0].replace(/,/g, '.')) || 0
+    const unit = (parts[1] || '').toUpperCase()
+    switch (unit) {
+      case 'GB':
+        return value * 1024 * 1024 * 1024
+      case 'MB':
+        return value * 1024 * 1024
+      case 'KB':
+        return value * 1024
+      default:
+        return value
+    }
+  }
+
+  const originalBytes = parseSize(multimediaData.originalSize)
+  const compressedBytes = parseSize(multimediaData.size)
+  const reductionPercent = originalBytes > 0 ? Math.round((1 - compressedBytes / originalBytes) * 1000) / 10 : 0
 
   const metadataData = {
     count: 1678,
@@ -83,6 +106,15 @@ export default function CargaArchivos() {
                   <div className="h-full bg-blue-500 w-[74%]" />
                   <div className="h-full bg-purple-500 w-[26%]" />
                </div>
+              {/* Información de compresión de imágenes sin pérdida */}
+              {multimediaData.images > 0 && (
+                <div className="mt-2 text-xs text-muted-foreground">
+                 <p>
+                  Imágenes comprimidas sin pérdida — reducción de peso aproximada: <span className="font-semibold text-foreground">{reductionPercent}%</span>
+                 </p>
+                 <p className="text-[10px] text-muted-foreground">{multimediaData.originalSize} → {multimediaData.size}</p>
+                </div>
+              )}
             </div>
           </div>
         </CardContent>
@@ -150,7 +182,7 @@ export default function CargaArchivos() {
                       <span className="text-xs font-bold text-purple-600">{aiData.accuracy}</span>
                   </div>
                   <div className="h-2 w-full bg-secondary rounded-full overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-blue-500 to-purple-600 w-[94.5%]" />
+                      <div className="h-full bg-linear-to-r from-blue-500 to-purple-600 w-[94.5%]" />
                   </div>
                   <p className="text-[10px] text-muted-foreground mt-1 text-right truncate">Modelo: {aiData.model}</p>
               </div>
