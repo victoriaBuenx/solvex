@@ -86,14 +86,10 @@ const [empty, setEmpty] = useState(true)
             <div className="flex items-center gap-4">
               <StatusBadge mode="wifi" />
               <ThemeToggle />
-          </div>
-
-          <div className="flex flex-row gap-2 mb-8 justify-between w-full">
-            <div className="flex gap-2 w-full">
-              <DeviceCardGroups devices={devices} />
-
+              </div>
             </div>
-          </div>
+
+         
 
           {/* Tab Content */}
           {activeTab === "sync" && (
