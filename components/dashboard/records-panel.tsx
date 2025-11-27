@@ -3,16 +3,15 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
-export default function RecordsPanel() {
+export default function RecordsPanel({empty} : {empty: boolean}) {
   const records = {
-    totalFiles: 2847,
+    totalFiles: 10185,
     byType: {
-      images: 1456,
-      audio: 847,
-      gps: 312,
-      metadata: 232,
+      images: 101,
+      audio: 84,
+      metadata: 10000,
     },
-    dataSize: "24.8 GB",
+    dataSize: "2.2 GB",
   }
 
   return (
@@ -23,9 +22,14 @@ export default function RecordsPanel() {
             <CardTitle>Registros Cargados (Contenido)</CardTitle>
             <CardDescription>Estructura de datos procesada</CardDescription>
           </div>
-          <Badge variant="outline" className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30">
-            Completado
-          </Badge>
+          {
+            !empty && (
+            <Badge variant="outline" className="bg-emerald-500/20 text-emerald-300 border-emerald-500/30">
+                Completado
+            </Badge>
+            ) 
+          }
+         
         </div>
       </CardHeader>
       <CardContent className="space-y-6">
@@ -33,18 +37,34 @@ export default function RecordsPanel() {
         <div className="grid grid-cols-2 gap-4">
           <div className="bg-muted/30 rounded-lg p-4 border border-border">
             <p className="text-xs text-muted-foreground mb-1">Total de Archivos</p>
-            <p className="text-2xl font-bold">{records.totalFiles.toLocaleString()}</p>
+            {
+              !empty ? (
+                <p className="text-2xl font-bold">{records.totalFiles.toLocaleString()}</p>
+              ) : (
+                <p className="text-2xl font-bold">---</p>
+
+              )
+            }
           </div>
           <div className="bg-muted/30 rounded-lg p-4 border border-border">
             <p className="text-xs text-muted-foreground mb-1">Tamaño Total</p>
-            <p className="text-2xl font-bold">{records.dataSize}</p>
+
+            {
+              !empty ? (
+                <p className="text-2xl font-bold">{records.dataSize}</p>
+              ) : (
+                <p className="text-2xl font-bold">---</p>
+              )
+            }
           </div>
         </div>
 
         {/* Data Types Breakdown */}
         <div>
           <h3 className="text-sm font-semibold mb-3">Distribución por Tipo</h3>
-          <div className="space-y-3">
+          {
+           !empty && (
+               <div className="space-y-3">
             {Object.entries(records.byType).map(([type, count]) => {
               const total = records.totalFiles
               const percentage = (count / total) * 100
@@ -72,19 +92,26 @@ export default function RecordsPanel() {
               )
             })}
           </div>
+            )
+          }
+         
         </div>
 
-        {/* Structure Info */}
-        <div className="bg-muted/20 border border-border rounded-lg p-3">
+        {
+          !empty && (
+<div className="bg-muted/20 border border-border rounded-lg p-3">
           <p className="text-xs font-mono text-muted-foreground mb-2">Estructura de Carpetas</p>
           <div className="text-xs font-mono space-y-1 text-foreground/70">
-            <p>📁 /data/2024-11-26/</p>
-            <p className="ml-4">📁 images/ (1,456 ✓)</p>
-            <p className="ml-4">📁 audio/ (847 ✓)</p>
-            <p className="ml-4">📁 gps/ (312 ✓)</p>
-            <p className="ml-4">📁 metadata/ (232 ✓)</p>
+            <p>📁 /data/tcam-001/2025-11-27/</p>
+            <p className="ml-4">📁 images/ (101 ✓)</p>
+            <p className="ml-4">📁 audio/ (84 ✓)</p>
+            <p className="ml-4">📁 metadata/ (10000 ✓)</p>
           </div>
         </div>
+          )
+        }
+        {/* Structure Info */}
+        
       </CardContent>
     </Card>
   )
