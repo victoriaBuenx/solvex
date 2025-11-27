@@ -37,30 +37,9 @@ export function DeviceCard({
   icon,
   ...props
 }: DeviceCardProps) {
-  if (status === "inactiva") {
-    return (
-      <Card
-        className={cn(
-          "w-full overflow-hidden h-[300px] bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-8",
-          className
-        )}
-        {...props}
-      >
-        <div className="flex flex-col items-center justify-center space-y-2">
-          <div className="h-12 w-12 flex items-center justify-center">
-            {icon || (
-              <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center">
-                <div className="h-6 w-6 text-muted-foreground">{icon}</div>
-              </div>
-            )}
-          </div>
-          <p className="text-muted-foreground text-sm">Inactivo</p>
-        </div>
-      </Card>
-    );
-  }
+  
 
-  if (status === "error") {
+  if (status === "error" ) {
     return (
       <Card
         className={cn(
@@ -82,6 +61,30 @@ export function DeviceCard({
           <p className="text-red-600 dark:text-red-400 text-sm font-medium">
             Error
           </p>
+        </div>
+      </Card>
+    );
+  }
+
+
+  if (status === "inactiva") {
+    return (
+      <Card
+        className={cn(
+          "w-full overflow-hidden h-[300px] bg-gray-100 dark:bg-gray-700 flex items-center justify-center p-8",
+          className
+        )}
+        {...props}
+      >
+        <div className="flex flex-col items-center justify-center space-y-2">
+          <div className="h-12 w-12 flex items-center justify-center">
+            {icon || (
+              <div className="h-12 w-12 rounded-full bg-muted flex items-center justify-center">
+                <div className="h-6 w-6 text-muted-foreground">{icon}</div>
+              </div>
+            )}
+          </div>
+          <p className="text-muted-foreground text-sm">Inactivo</p>
         </div>
       </Card>
     );

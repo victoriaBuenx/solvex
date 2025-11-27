@@ -21,7 +21,7 @@ import {
 import DeviceCardGroups from "@/components/dashboard/DeviceCardGroups";
 
 const POLLING_RATE = 3000;
-const API_URL = "http://10.156.124.132:8000/api/devices"
+const API_URL = "http://10.67.254.132:8000/api/devices"
 
 
 import ModelsPanel from "@/components/dashboard/models";
@@ -36,11 +36,15 @@ export default function DashboardPage() {
     }
 
     const data = await response.json()
-    console.log("Datos de dispositivos:", data)
+    console.log(data)
+    console.log(Object.keys(data).length)
     setDevices(data)
+    if(Object.keys(data).length > 0) {
+      setEmpty(false)
+    }
 
   } catch (err) {
-    console.error("Fallo al obtener estado")
+    console.error("Fallo al obtener estado" + err)
   }
 }
 
@@ -58,6 +62,7 @@ export default function DashboardPage() {
 }, [])
 
 const [devices, setDevices] = useState();
+const [empty, setEmpty] = useState(true)
 
   return (
     <div className="flex flex-col md:flex-row min-h-screen bg-background text-foreground">
@@ -82,26 +87,17 @@ const [devices, setDevices] = useState();
 
           <div className="flex flex-row gap-2 mb-8 justify-between w-full">
             <div className="flex gap-2 w-full">
-              
-
               <DeviceCardGroups devices={devices} />
-    
-               
             </div>
           </div>
 
           {/* Tab Content */}
           {activeTab === "sync" && (
             <>
-              <div className="flex flex-row gap-2 mb-8 justify-between w-full">
-                <div className="flex gap-2 w-full">
-                  
-                </div>
-              </div>
               <div>
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-                  <SDProgressPanel />
-                  <RecordsPanel />
+                  <SDProgressPanel empty={empty} />
+                  <RecordsPanel empty={empty} />
                 </div>
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                   <div className="lg:col-span-2">
