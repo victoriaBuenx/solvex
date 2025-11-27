@@ -62,7 +62,7 @@ export default function DashboardPage() {
 const [devices, setDevices] = useState();
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen bg-background text-foreground">
+    <div className="flex min-h-screen bg-background text-foreground md:pl-64">
       <SidebarNav activeTab={activeTab} onTabChange={setActiveTab} />
 
       {/* Main Content */}
