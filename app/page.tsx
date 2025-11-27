@@ -29,6 +29,7 @@ const API_URL = "http://10.67.254.132:8000/api/devices"
 import ModelsPanel from "@/components/dashboard/models";
 import CargaArchivos from "@/components/dashboard/carga_archivos";
 import { StatusBadge } from "@/components/dashboard/statusBadge";
+import FileManager from "@/components/dashboard/FileManager";
 
 export default function DashboardPage() {
   const fetchDevices = async() => {
@@ -222,6 +223,11 @@ const [empty, setEmpty] = useState(true)
           {activeTab === "models" && (
             <div>
               <ModelsPanel />
+            </div>
+          )}
+          {activeTab === "files" && (
+            <div>
+              <FileManager />
             </div>
           )}
         </div>

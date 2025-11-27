@@ -41,6 +41,11 @@ const tabs: NavTab[] = [
     label: "Modelos",
     icon: <Bot className="w-5 h-5" />,
   },
+  {
+    id: "files",
+    label: "Archivos",
+    icon: <HardDrive className="w-5 h-5" />,
+  }
 ];
 
 export default function SidebarNav({
