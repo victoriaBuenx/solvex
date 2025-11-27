@@ -36,7 +36,7 @@ const DeviceCardGroups = ({ devices }) => {
 
         // Determinar el Estado
         let status;
-        if (deviceData.valid === false) {
+        if (deviceData.valid === false && deviceData.connected === true) {
             status = "error"; 
         } else if (deviceData.connected === true) {
             status = "montada"; 
