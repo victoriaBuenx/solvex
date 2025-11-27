@@ -11,6 +11,7 @@ import { DeviceCard } from "@/components/ui/deviceCard";
 import { MdOutlineSdStorage } from "react-icons/md";
 import { CiUsb } from "react-icons/ci";
 import { AiOutlineUsb } from "react-icons/ai";
+import { Badge } from "@/components/ui/badge"
 import {
   Card,
   CardContent,
@@ -25,6 +26,7 @@ const API_URL = "http://10.156.124.132:8000/api/devices"
 
 
 import ModelsPanel from "@/components/dashboard/models";
+import { StatusBadge } from "@/components/dashboard/statusBadge";
 
 export default function DashboardPage() {
   const fetchDevices = async() => {
@@ -76,26 +78,22 @@ const [devices, setDevices] = useState();
                 monitoreo
               </p>
             </div>
-
-            <ThemeToggle />
-          </div>
-
-          <div className="flex flex-row gap-2 mb-8 justify-between w-full">
-            <div className="flex gap-2 w-full">
-              
-
-              <DeviceCardGroups devices={devices} />
-    
-               
+            <div className="flex items-center gap-4">
+              <StatusBadge mode="wifi" />
+              <ThemeToggle />
             </div>
           </div>
 
           {/* Tab Content */}
           {activeTab === "sync" && (
             <>
+              <div className="flex flex-row gap-2 mb-2 justify-between w-full">
+                <div className="flex gap-2 w-full">
+                  <DeviceCardGroups devices={devices} />
+                </div>
+              </div>
               <div className="flex flex-row gap-2 mb-8 justify-between w-full">
                 <div className="flex gap-2 w-full">
-                  
                 </div>
               </div>
               <div>
