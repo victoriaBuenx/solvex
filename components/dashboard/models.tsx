@@ -25,7 +25,6 @@ export default function ModelsPanel() {
         {
       id: 1,
       title: "Guacamaya Roja",
-      // Foto vibrante de Zdeněk Macháček
       image:
         "https://elements-resized.envatousercontent.com/elements-video-cover-images/fbb5daa3-ee95-4fb4-a4c8-925ed36bc793/video_preview/video_preview_0000.jpg?w=500&cf_fit=cover&q=85&format=auto&s=8bfe862bc3b68e12e4e5a11e650ae65ca3d18fa0d13378f7954ce8787a3a4695",
     },
@@ -90,32 +89,32 @@ export default function ModelsPanel() {
         {
           id: 1,
           title: "Venado Cola Blanca",
-          image: "https://upload.wikimedia.org/wikipedia/commons/9/9f/Whitetail_deer.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTffBgY63PPX4G2AIQWjG5OEhwhVRJWLDlKeA&s",
         },
         {
           id: 2,
           title: "Ocelote",
-          image: "https://upload.wikimedia.org/wikipedia/commons/5/5c/Ocelot_%28Leopardus_pardalis%29.jpg",
+          image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTV34_hSz0LO0TuytpfTTrPh5QcahIwOv-bcgYwJHggkl1hKBN8qhWxviRWlf3Dexaf56k",
         },
         {
           id: 3,
           title: "Jaguar",
-          image: "https://upload.wikimedia.org/wikipedia/commons/0/0a/Standing_jaguar.jpg",
+          image: "https://oem.com.mx/elsoldehermosillo/img/19398033/1642076300/BASE_LANDSCAPE/480/image.webp",
         },
         {
           id: 4,
           title: "Tlacuache",
-          image: "https://upload.wikimedia.org/wikipedia/commons/4/48/Opossum_2.jpg",
+          image: "https://oem.com.mx/elsoldecordoba/img/13927550/1712141729/BASE_LANDSCAPE/480/image.webp",
         },
         {
           id: 5,
           title: "Puma",
-          image: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Puma_Face.jpg",
+          image: "https://portal.andina.pe/EDPFotografia3/thumbnail/2018/12/06/000548338M.jpg",
         },
         {
           id: 6,
           title: "Armadillo",
-          image: "https://upload.wikimedia.org/wikipedia/commons/3/32/Armadillo_%28Dasypus_novemcinctus%29.jpg",
+          image: "https://ecosdelbosque.com/sites/default/files/styles/specie_slider/public/2025-07/Dasypus_novemincinctus_09.jpg?itok=hlFiSSCT",
         },
       ]
     },
@@ -134,18 +133,18 @@ export default function ModelsPanel() {
         },
         {
           id: 2,
-          title: "Tecolote",
-          image: "/audio/samples/tecolote_002.wav"
+          title: "Esmeralda coliverde",
+          image: "https://wordpress11997.wordpress.com/wp-content/uploads/2020/05/1a-esmeralda-coliverde-llamado.jpg"
         },
         {
           id: 3,
-          title: "Zanate mexicano",
-          image: "/audio/samples/zanate_003.wav"
+          title: "Gavilán pantalón largo",
+          image: "https://wordpress11997.wordpress.com/wp-content/uploads/2020/05/1a-gavilan-pantalon-llamado-largo.jpg"
         },
         {
           id: 4,
-          title: "Cenzontle",
-          image: "/audio/samples/cenzontle_004.wav"
+          title: "Tangara líder",
+          image: "https://wordpress11997.wordpress.com/wp-content/uploads/2020/04/1a-tangara-lider-llamado-y-canto.jpg"
         }
       ]
     }
