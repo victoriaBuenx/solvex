@@ -22,6 +22,16 @@ const tabs: NavTab[] = [
     icon: <HardDrive className="w-5 h-5" />,
   },
   {
+    id: "models",
+    label: "Modelos",
+    icon: <Bot className="w-5 h-5" />,
+  },
+  {
+    id: "files",
+    label: "Archivos",
+    icon: <HardDrive className="w-5 h-5" />,
+  },
+  {
     id: "logs",
     label: "Logs",
     icon: <Activity className="w-5 h-5" />,
@@ -36,16 +46,6 @@ const tabs: NavTab[] = [
     label: "Sistema",
     icon: <Info className="w-5 h-5" />,
   },
-  {
-    id: "models",
-    label: "Modelos",
-    icon: <Bot className="w-5 h-5" />,
-  },
-  {
-    id: "files",
-    label: "Archivos",
-    icon: <HardDrive className="w-5 h-5" />,
-  }
 ];
 
 export default function SidebarNav({
